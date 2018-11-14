@@ -1,0 +1,85 @@
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class BattingApp {
+
+	public static void main(String[] arg) {
+
+        //Variable
+        Scanner sc = new Scanner(System.in);
+        
+        // Welcome user to the app
+        System.out.println("Welcome to the Batting Average Calculator.");
+
+        // Start
+        char addAnotherBatter = 'y';
+
+        do {
+              // Ask number of at bats
+              int numBats;
+              do {
+
+                    System.out.print("\nEnter the number of times at bat: ");
+                    numBats = Console.getInt(sc.nextLine().trim());
+                    if (numBats == -1)
+                          System.out.println("Invalid value. Please try again.");
+              } while (numBats == -1);
+
+              // Get status for each numBats batting
+
+              ArrayList<Integer> atBats = new ArrayList<Integer>(numBats);
+
+              System.out.println("\n0 = out, 1 = single, 2 = double, 3 = triple, 4 = home run");
+
+              for (int i = 0; i < numBats; i++) {
+
+                    int atBat;
+                    do {
+
+                          System.out.print("Result for at-bat " + i + ": ");
+                          atBat = Console.isValidAtBats(sc.nextLine().trim());
+                          
+                          if (atBat == -1)
+                                System.out.println("Invalid value. Please try again.");
+                    } while (atBat == -1);
+    
+                    // If atBat is valid add to the array list
+                    atBats.add(atBat);
+              }
+
+              // Print results
+              NumberFormat nf = NumberFormat.getInstance();
+              nf.setMaximumFractionDigits(3);
+              nf.setMinimumFractionDigits(3);
+              
+              double sum = 0;
+              int totalHits = 0;
+
+              for (Integer hits : atBats) {
+                    sum += hits;
+                    // Check for hits
+                    if (hits != 0)
+                          totalHits += 1;
+              }
+
+              // Display batting average
+              System.out.println("\nBatting average: " + nf.format((totalHits * 1.0) / numBats));
+
+              // Display slugging percent
+              System.out.println("Slugging percent: " + nf.format(sum / numBats));
+
+              // ask if user wants to continue
+              do {
+
+                    System.out.print("\nAnother Batter? (y/n): ");
+                    addAnotherBatter = sc.nextLine().toLowerCase().trim().charAt(0);
+              } while ((addAnotherBatter != 'y') && (addAnotherBatter != 'n'));
+        } while (addAnotherBatter == 'y'); // end do-while loop
+
+        System.out.println("Press any key to continue . . .");
+        sc.nextLine();
+
+  }
+}
