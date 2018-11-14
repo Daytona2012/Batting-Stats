@@ -1,0 +1,52 @@
+
+public class Console {
+
+	 private static final int MIN_BAT = 1;
+     private static final int MAX_BAT = 30;
+
+     /**
+     * Returns an integer if numStr has a valid positive integer and is within
+     * range [MIN_BAT - MAX_BAT]
+     *
+     * @param numStr
+     *            - string containing number
+     * @return - Returns numStr as integer if valid, otherwise returns -1
+     */
+
+     public static int getInt(String numStr) {
+           int num = -1;
+           try {
+                 num = Integer.parseInt(numStr);
+                 // Check if num is not within range
+                 if ((num < MIN_BAT) || (num > MAX_BAT))
+                       num = -1;
+           } catch (NumberFormatException nfe) {
+                // Do nothing
+           }
+           return num;
+     }
+    
+     /**
+      * Returns an integer if numStr has a valid non-negative integer and is
+      * within range [0, 1, 2, 3, 4]
+      *
+      * @param atBatStr
+      *            - string containing number
+      * @return - Returns atBatStr as integer if valid, otherwise returns -1
+      */
+     
+     public static int isValidAtBats(String atBatStr) {
+         int atBat = -1;
+         try {
+               atBat = Integer.parseInt(atBatStr);
+               // Check if atBat is not within range
+               if ((atBat != 0) && (atBat != 1) && (atBat != 2) && (atBat != 3) && (atBat != 4))
+                     atBat = -1;
+         } catch (NumberFormatException nfe) {
+               // Do nothing
+         }
+         return atBat;
+   }
+
+}
+
